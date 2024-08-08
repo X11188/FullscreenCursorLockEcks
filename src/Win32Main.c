@@ -129,7 +129,10 @@ win32Start(void) {
       Shell_NotifyIconA(NIM_ADD, &taskbarIconData);
 #endif
       MSG msg;
-      while(GetMessageA(&msg, hwnd, WM_INPUT, WM_INPUT)) Sleep(100);
+      while(GetMessageA(&msg, 0, WM_DESTROY, WM_CLOSE)) {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+      }
     }
   }
   
